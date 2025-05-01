@@ -34,14 +34,9 @@ function sendDataToSheet(data) {
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
   })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.result === "success") {
-        showAlert("Pesan berhasil dikirim!");
-        form.reset();
-      } else {
-        showAlert("Gagal mengirim pesan.", true);
-      }
+    .then(() => {
+      showAlert("Pesan berhasil dikirim! (tanpa respons konfirmasi)");
+      form.reset(); // pastikan variabel 'form' sudah dideklarasikan
     })
     .catch(() => {
       showAlert("Terjadi kesalahan jaringan.", true);
