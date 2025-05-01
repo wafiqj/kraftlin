@@ -32,7 +32,7 @@ function sendDataToSheet(data) {
     redirect: "follow",
     method: "POST",
     body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
   })
     .then((res) => res.json())
     .then((res) => {
