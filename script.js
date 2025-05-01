@@ -29,6 +29,7 @@ document.getElementById("cancelSend").onclick = () => {
 
 function sendDataToSheet(data) {
   fetch("https://script.google.com/macros/s/AKfycbzv1zYNWtf8ki4DV85eyLkcKZuHhAM0fOXK-fMw3IKX9uHv_bIv_LJ8xb6d1mYw1X4L/exec", {
+    redirect: "follow",
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
