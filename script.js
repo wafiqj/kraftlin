@@ -66,11 +66,11 @@ function myFunction(x) {
 
 window.addEventListener("resize", function () {
   var menu = document.querySelector(".menu");
-  var container = document.querySelector(".container");
+  var container = document.querySelector('.container');
   if (window.innerWidth > 1280) {
     menu.style.display = "flex";
   } else {
     menu.style.display = "none";
-    container.classList.remove("change");
+    container.classList.remove('change');
   }
 });
