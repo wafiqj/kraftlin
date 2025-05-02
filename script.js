@@ -28,10 +28,11 @@ document.getElementById("cancelSend").onclick = () => {
 };
 
 function sendDataToSheet(data) {
-  fetch("https://script.google.com/macros/s/AKfycbzv1zYNWtf8ki4DV85eyLkcKZuHhAM0fOXK-fMw3IKX9uHv_bIv_LJ8xb6d1mYw1X4L/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxE4vXNf0wWGDNEbYaUESyoWR6tfgvuBsBDKPAWPPwvKnlv5tsBFZo6ugChJFmo66NG2w/exec", {
+    redirect: "follow",
     method: "POST",
     body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
   })
     .then((res) => res.json())
     .then((res) => {
