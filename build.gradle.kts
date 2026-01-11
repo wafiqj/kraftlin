@@ -62,8 +62,8 @@ subprojects {
             name.set(project.name)
             description.set(
                 when (project.name) {
-                    "kraftlin-commands-core" -> "Kotlin DSL wrapper for Mojang Brigadier."
-                    "kraftlin-commands-paper" -> "Paper integration for Kraftlin commands."
+                    "kraftlin-command-core" -> "Kotlin DSL wrapper for Mojang Brigadier."
+                    "kraftlin-command-paper" -> "Paper integration for Kraftlin commands."
                     else -> "Kraftlin module: ${project.name}"
                 }
             )
