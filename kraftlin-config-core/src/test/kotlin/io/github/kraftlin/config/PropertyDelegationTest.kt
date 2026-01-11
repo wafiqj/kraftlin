@@ -1,6 +1,6 @@
-package de.devsylum.kconfig
+package io.github.kraftlin.config
 
-import de.devsylum.kconfig.AbstractConfig.ConfigWrapper
+import io.github.kraftlin.config.AbstractConfig.ConfigWrapper
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

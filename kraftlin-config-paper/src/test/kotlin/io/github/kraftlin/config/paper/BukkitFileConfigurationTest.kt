@@ -1,6 +1,6 @@
-package de.devsylum.kconfig.bukkit
+package io.github.kraftlin.config.paper
 
-import de.devsylum.kconfig.AbstractConfig
+import io.github.kraftlin.config.AbstractConfig
 import org.intellij.lang.annotations.Language
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Files

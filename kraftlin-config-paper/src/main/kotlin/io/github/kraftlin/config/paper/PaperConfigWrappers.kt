@@ -1,6 +1,6 @@
-package de.devsylum.kconfig.bukkit
+package io.github.kraftlin.config.paper
 
-import de.devsylum.kconfig.AbstractConfig
+import io.github.kraftlin.config.AbstractConfig
 import org.bukkit.configuration.Configuration
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.Plugin

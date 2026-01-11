@@ -1,4 +1,4 @@
-package de.devsylum.kconfig
+package io.github.kraftlin.config
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -21,7 +21,7 @@ public data class SqlConfiguration(val url: String, val user: String, val passwo
 }
 
 /**
- * Loads a [SqlConfiguration] from file, optionally storing a default example configuration if none exists.
+ * Loads a [io.github.kraftlin.config.SqlConfiguration] from file, optionally storing a default example configuration if none exists.
  *
  * The configuration file name is `database.properties` in the directory [dataFolder]. The file is stored and read in
  * `UTF-8` format.

@@ -1,7 +1,7 @@
-package de.devsylum.kconfig.bukkit
+package io.github.kraftlin.config.paper
 
 import com.google.common.base.Charsets
-import de.devsylum.kconfig.AbstractConfig
+import io.github.kraftlin.config.AbstractConfig
 import io.mockk.every
 import io.mockk.mockk
 import org.bukkit.configuration.file.FileConfiguration

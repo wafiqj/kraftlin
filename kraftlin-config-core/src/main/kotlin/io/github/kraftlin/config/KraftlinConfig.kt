@@ -1,4 +1,4 @@
-package de.devsylum.kconfig
+package io.github.kraftlin.config
 
 import java.util.UUID
 import kotlin.reflect.KProperty

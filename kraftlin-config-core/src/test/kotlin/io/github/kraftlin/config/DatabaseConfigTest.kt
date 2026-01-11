@@ -1,4 +1,4 @@
-package de.devsylum.kconfig
+package io.github.kraftlin.config
 
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Files
