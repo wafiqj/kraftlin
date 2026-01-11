@@ -45,7 +45,7 @@ subprojects {
         }
     }
 
-    extensions.configure<DokkaExtension>() {
+    extensions.configure<DokkaExtension> {
         dokkaSourceSets.configureEach {
             val docFile = file("docs/${project.name}.md")
             if (docFile.isFile) {
@@ -111,6 +111,10 @@ subprojects {
                 url.set("https://github.com/kraftlin")
             }
         }
+    }
+
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
     }
 }
 

@@ -7,5 +7,3 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.paper.api)
 }
-
-tasks.test { useJUnitPlatform() }
