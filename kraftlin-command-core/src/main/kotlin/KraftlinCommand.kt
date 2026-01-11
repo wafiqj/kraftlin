@@ -11,7 +11,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import com.mojang.brigadier.tree.LiteralCommandNode
 import java.util.concurrent.CompletableFuture
 
-public object KBrigx {
+public object KraftlinCommand {
     public fun <S> command(
         name: String,
         block: LiteralNode<S>.() -> Unit,
@@ -23,7 +23,7 @@ public object KBrigx {
     }
 }
 
-@KBrigxDsl
+@CommandDsl
 public class KContext<S>(
     public val rawContext: CommandContext<S>,
 ) {
@@ -37,12 +37,12 @@ public class KContext<S>(
     public val source: S get() = rawContext.source
 }
 
-@KBrigxDsl
+@CommandDsl
 public open class LiteralNode<S> internal constructor(
     public val builder: ArgumentBuilder<S, *>,
 )
 
-@KBrigxDsl
+@CommandDsl
 public class ArgumentNode<S, T> internal constructor(
     public val argBuilder: RequiredArgumentBuilder<S, T>,
 ) : LiteralNode<S>(argBuilder)
@@ -87,7 +87,7 @@ public fun <S> LiteralNode<S>.requires(predicate: (S) -> Boolean): Unit = addReq
 /* Execution                                                                  */
 /* -------------------------------------------------------------------------- */
 
-@KBrigxDsl
+@CommandDsl
 public class ExecuteScope<S> internal constructor()
 
 public fun <S> LiteralNode<S>.executes(

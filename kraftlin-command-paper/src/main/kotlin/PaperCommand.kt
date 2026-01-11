@@ -12,11 +12,11 @@ public typealias PaperArgumentNode<T> = ArgumentNode<PaperSource, T>
 public typealias PaperContext = KContext<PaperSource>
 public typealias PaperExecuteScope = ExecuteScope<PaperSource>
 
-public object PaperKBrigx {
+public object PaperCommand {
     public fun command(
         name: String,
         block: PaperLiteralNode.() -> Unit,
-    ): LiteralCommandNode<PaperSource> = KBrigx.command(name, block)
+    ): LiteralCommandNode<PaperSource> = KraftlinCommand.command(name, block)
 }
 
 public fun PaperLiteralNode.executes(

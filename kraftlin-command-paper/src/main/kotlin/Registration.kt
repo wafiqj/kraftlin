@@ -4,18 +4,18 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
-import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.plugin.Plugin
 
-public fun JavaPlugin.registerBrigxCommands(
-    block: BrigxRegistrationScope.() -> Unit
+public fun Plugin.registerKraftlinCommands(
+    block: PaperRegistrationScope.() -> Unit
 ) {
     lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
-        val scope = BrigxRegistrationScope(event.registrar())
+        val scope = PaperRegistrationScope(event.registrar())
         scope.block()
     }
 }
 
-public class BrigxRegistrationScope internal constructor(
+public class PaperRegistrationScope internal constructor(
     private val commands: Commands
 ) {
 

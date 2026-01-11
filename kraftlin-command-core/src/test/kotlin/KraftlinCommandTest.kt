@@ -1,17 +1,18 @@
 package io.github.kraftlin.command
 
 import com.mojang.brigadier.CommandDispatcher
+import com.mojang.brigadier.arguments.StringArgumentType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class KBrigxTest {
+class KraftlinCommandTest {
 
     @Test
     fun `builds nested literals and executes`() {
         val dispatcher = CommandDispatcher<Any>()
         var executed = false
-        val root = KBrigx.command<Any>("root") {
+        val root = KraftlinCommand.command<Any>("root") {
             literal("sub") {
                 executes {
                     executed = true
@@ -27,7 +28,7 @@ class KBrigxTest {
     @Test
     fun `test executesResult`() {
         val dispatcher = CommandDispatcher<Any>()
-        val root = KBrigx.command<Any>("test") {
+        val root = KraftlinCommand.command<Any>("test") {
             executesResult { 42 }
         }
         dispatcher.root.addChild(root)
@@ -39,8 +40,8 @@ class KBrigxTest {
     @Test
     fun `test suggestsStatic`() {
         val dispatcher = CommandDispatcher<Any>()
-        val root = KBrigx.command<Any>("test") {
-            argument("arg", com.mojang.brigadier.arguments.StringArgumentType.word()) {
+        val root = KraftlinCommand.command<Any>("test") {
+            argument("arg", StringArgumentType.word()) {
                 suggestsStatic("a", "b", "c")
             }
         }
@@ -55,8 +56,8 @@ class KBrigxTest {
     @Test
     fun `test suggests`() {
         val dispatcher = CommandDispatcher<Any>()
-        val root = KBrigx.command<Any>("test") {
-            argument("arg", com.mojang.brigadier.arguments.StringArgumentType.word()) {
+        val root = KraftlinCommand.command<Any>("test") {
+            argument("arg", StringArgumentType.word()) {
                 suggests { _, builder ->
                     builder.suggest("dynamic")
                     builder.buildFuture()
@@ -73,7 +74,7 @@ class KBrigxTest {
 
     @Test
     fun `requirements are combined`() {
-        val root = KBrigx.command<Int>("cmd") {
+        val root = KraftlinCommand.command<Int>("cmd") {
             requires { it > 0 }
             requires { it % 2 == 0 }
             executes { }
