@@ -47,7 +47,10 @@ subprojects {
 
     extensions.configure<DokkaExtension>() {
         dokkaSourceSets.configureEach {
-            includes.from(file("docs/${project.name}.md"))
+            val docFile = file("docs/${project.name}.md")
+            if (docFile.isFile) {
+                includes.from(docFile)
+            }
         }
     }
 
