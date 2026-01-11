@@ -21,6 +21,9 @@ public fun <S> brigadierCommand(
     return root.build()
 }
 
+@DslMarker
+public annotation class CommandDsl
+
 @CommandDsl
 public class KContext<S>(
     public val rawContext: CommandContext<S>,
