@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Only run if it's a push to main (for snapshots) or a tag (for releases)
+    # The 'on' filter already handles this, but we can be explicit if needed.
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Build
+        run: ./gradlew build --no-daemon
+
+      - name: Get Version
+        id: version
+        run: |
+          v=$(./gradlew -q currentVersion | grep "Project version:" | awk '{print $NF}')
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            core/build/libs/*.jar
+            paper/build/libs/*.jar
+
+      - name: Publish to Maven Central
+        if: |
+          (github.ref == 'refs/heads/main' && contains(steps.version.outputs.version, '-SNAPSHOT')) ||
+          startsWith(github.ref, 'refs/tags/v')
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
+        run: ./gradlew publishToMavenCentral --no-daemon
