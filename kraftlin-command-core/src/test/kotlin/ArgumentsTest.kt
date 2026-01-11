@@ -1,4 +1,4 @@
-package io.github.kbrigx.core
+package io.github.kraftlin.command
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.exceptions.CommandSyntaxException

@@ -1,10 +1,10 @@
-package io.github.kbrigx.paper.arguments
+package io.github.kraftlin.command.paper.arguments
 
 import com.destroystokyo.paper.profile.PlayerProfile
-import io.github.kbrigx.core.argument
-import io.github.kbrigx.paper.PaperArgumentNode
-import io.github.kbrigx.paper.PaperContext
-import io.github.kbrigx.paper.PaperLiteralNode
+import io.github.kraftlin.command.argument
+import io.github.kraftlin.command.paper.PaperArgumentNode
+import io.github.kraftlin.command.paper.PaperContext
+import io.github.kraftlin.command.paper.PaperLiteralNode
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import io.papermc.paper.command.brigadier.argument.resolvers.PlayerProfileListResolver
 import java.util.*

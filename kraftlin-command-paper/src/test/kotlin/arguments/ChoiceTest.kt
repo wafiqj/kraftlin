@@ -1,11 +1,11 @@
-package io.github.kbrigx.paper.arguments
+package io.github.kraftlin.command.paper.arguments
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
-import io.github.kbrigx.core.KContext
-import io.github.kbrigx.paper.PaperKBrigx
-import io.github.kbrigx.paper.PaperSource
-import io.github.kbrigx.paper.executes
+import io.github.kraftlin.command.KContext
+import io.github.kraftlin.command.paper.PaperKBrigx
+import io.github.kraftlin.command.paper.PaperSource
+import io.github.kraftlin.command.paper.executes
 import io.mockk.every
 import io.mockk.mockk
 import kotlin.test.Test

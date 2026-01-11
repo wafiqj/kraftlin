@@ -1,9 +1,9 @@
-package io.github.kbrigx.paper.arguments
+package io.github.kraftlin.command.paper.arguments
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import io.github.kbrigx.core.KContext
-import io.github.kbrigx.paper.PaperSource
+import io.github.kraftlin.command.KContext
+import io.github.kraftlin.command.paper.PaperSource
 import io.mockk.every
 import io.mockk.mockk
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver

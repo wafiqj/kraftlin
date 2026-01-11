@@ -1,11 +1,11 @@
-package io.github.kbrigx.paper.arguments
+package io.github.kraftlin.command.paper.arguments
 
-import io.github.kbrigx.core.argument
-import io.github.kbrigx.paper.PaperArgumentNode
-import io.github.kbrigx.paper.PaperContext
-import io.github.kbrigx.paper.PaperLiteralNode
-import io.github.kbrigx.paper.arguments.internal.enumChoice
-import io.github.kbrigx.paper.arguments.internal.stringChoice
+import io.github.kraftlin.command.argument
+import io.github.kraftlin.command.paper.PaperArgumentNode
+import io.github.kraftlin.command.paper.PaperContext
+import io.github.kraftlin.command.paper.PaperLiteralNode
+import io.github.kraftlin.command.paper.arguments.internal.enumChoice
+import io.github.kraftlin.command.paper.arguments.internal.stringChoice
 
 
 /**

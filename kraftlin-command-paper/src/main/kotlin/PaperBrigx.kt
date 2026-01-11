@@ -1,7 +1,7 @@
-package io.github.kbrigx.paper
+package io.github.kraftlin.command.paper
 
 import com.mojang.brigadier.tree.LiteralCommandNode
-import io.github.kbrigx.core.*
+import io.github.kraftlin.command.*
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

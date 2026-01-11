@@ -1,8 +1,8 @@
-package io.github.kbrigx.paper
+package io.github.kraftlin.command.paper
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import io.github.kbrigx.core.KContext
-import io.github.kbrigx.core.executes
+import io.github.kraftlin.command.KContext
+import io.github.kraftlin.command.executes
 import io.mockk.every
 import io.mockk.mockk
 import org.bukkit.command.CommandSender

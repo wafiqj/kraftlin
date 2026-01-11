@@ -1,4 +1,4 @@
-package io.github.kbrigx.paper.arguments.internal
+package io.github.kraftlin.command.paper.arguments.internal
 
 import com.mojang.brigadier.LiteralMessage
 import com.mojang.brigadier.Message

@@ -1,10 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
-package io.github.kbrigx.paper.arguments
+package io.github.kraftlin.command.paper.arguments
 
 import com.mojang.brigadier.context.CommandContext
-import io.github.kbrigx.core.KContext
-import io.github.kbrigx.paper.PaperSource
+import io.github.kraftlin.command.KContext
+import io.github.kraftlin.command.paper.PaperSource
 import io.mockk.every
 import io.mockk.mockk
 import io.papermc.paper.command.brigadier.argument.position.ColumnBlockPosition

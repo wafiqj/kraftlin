@@ -1,4 +1,4 @@
-package io.github.kbrigx.paper
+package io.github.kraftlin.command.paper
 
 import com.mojang.brigadier.tree.LiteralCommandNode
 import io.papermc.paper.command.brigadier.CommandSourceStack

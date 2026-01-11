@@ -7,21 +7,21 @@ It contains no Minecraft or Paper dependencies and can be used in any Brigadier-
 
 ## Key Primitives
 
-- [io.github.kbrigx.core.KBrigx]: Entry point for creating commands.
-- [io.github.kbrigx.core.LiteralNode]: Base for literal command nodes.
-- [io.github.kbrigx.core.ArgumentNode]: Base for required argument nodes.
-- [io.github.kbrigx.core.KContext]: Wrapper around Brigadier's `CommandContext`.
+- [io.github.kraftlin.command.KBrigx]: Entry point for creating commands.
+- [io.github.kraftlin.command.LiteralNode]: Base for literal command nodes.
+- [io.github.kraftlin.command.ArgumentNode]: Base for required argument nodes.
+- [io.github.kraftlin.command.KContext]: Wrapper around Brigadier's `CommandContext`.
 
-# Package io.github.kbrigx.core
+# Package io.github.kraftlin.command
 
 Core DSL primitives and node builders used to construct command trees.
 
 This package contains:
 
-- Entry points like [io.github.kbrigx.core.KBrigx.command] for creating command trees.
-- Node builders like [io.github.kbrigx.core.literal] and [io.github.kbrigx.core.argument].
-- [io.github.kbrigx.core.KContext] for idiomatic argument retrieval.
-- Execution builders like [io.github.kbrigx.core.executes] and [io.github.kbrigx.core.executesResult].
-- Requirement builders like [io.github.kbrigx.core.requires].
+- Entry points like [io.github.kraftlin.command.KBrigx.command] for creating command trees.
+- Node builders like [io.github.kraftlin.command.literal] and [io.github.kraftlin.command.argument].
+- [io.github.kraftlin.command.KContext] for idiomatic argument retrieval.
+- Execution builders like [io.github.kraftlin.command.executes] and [io.github.kraftlin.command.executesResult].
+- Requirement builders like [io.github.kraftlin.command.requires].
 
 All functionality here is platform-agnostic and does not depend on Paper or Minecraft classes.

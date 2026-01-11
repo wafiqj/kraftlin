@@ -1,6 +1,6 @@
-package io.github.kbrigx.paper
+package io.github.kraftlin.command.paper
 
-import io.github.kbrigx.core.requires
+import io.github.kraftlin.command.requires
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
