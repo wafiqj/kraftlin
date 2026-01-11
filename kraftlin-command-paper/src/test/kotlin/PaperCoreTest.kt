@@ -62,14 +62,14 @@ class PaperCoreTest {
         val node = kraftlinCommand("test") {
             requiresPermission("test.perm")
             executes { }
-        }.createBuilder().build()
+        }.node
 
         assertEquals(true, node.requirement.test(source))
 
         val failNode = kraftlinCommand("fail") {
             requiresPermission("fail.perm")
             executes { }
-        }.createBuilder().build()
+        }.node
 
         assertEquals(false, failNode.requirement.test(source))
     }
@@ -88,7 +88,7 @@ class PaperCoreTest {
         val node = kraftlinCommand("test") {
             requiresPlayer()
             executes { }
-        }.createBuilder().build()
+        }.node
 
         assertEquals(true, node.requirement.test(playerSource))
         assertEquals(false, node.requirement.test(senderSource))
@@ -103,7 +103,7 @@ class PaperCoreTest {
         val node = kraftlinCommand("test") {
             requiresSender { it == sender }
             executes { }
-        }.createBuilder().build()
+        }.node
 
         assertEquals(true, node.requirement.test(source))
 
@@ -114,9 +114,9 @@ class PaperCoreTest {
 
     @Test
     fun `test paper command entry point`() {
-        val node = kraftlinCommand("test") {
+        val cmd = kraftlinCommand("test") {
             executes { }
         }
-        assertEquals("test", node.literal)
+        assertEquals("test", cmd.node.literal)
     }
 }

@@ -32,13 +32,13 @@ class ChoiceTest {
 
     @Test
     fun `test choice DSL`() {
-        val node = kraftlinCommand("test") {
+        val cmd = kraftlinCommand("test") {
             choice("myChoice", listOf("a", "b")) {
                 executes { _, _ -> }
             }
         }
 
-        val arg = node.children.first()
+        val arg = cmd.node.children.first()
         assertEquals("myChoice", arg.name)
         // ChoiceArgumentType is internal, but we can check if it's there
         // and if it produces suggestions
@@ -60,13 +60,13 @@ class ChoiceTest {
 
     @Test
     fun `test enum DSL`() {
-        val node = kraftlinCommand("test") {
+        val cmd = kraftlinCommand("test") {
             enum<TestEnum>("myEnum") {
                 executes { _, _ -> }
             }
         }
 
-        val arg = node.children.first()
+        val arg = cmd.node.children.first()
         assertEquals("myEnum", arg.name)
         val suggestions = arg.listSuggestions(mockk(), SuggestionsBuilder("", 0)).get()
         val tokens = suggestions.list.map { it.text }
