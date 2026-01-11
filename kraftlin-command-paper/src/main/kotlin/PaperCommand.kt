@@ -13,10 +13,24 @@ public typealias PaperContext = KContext<PaperSource>
 public typealias PaperExecuteScope = ExecuteScope<PaperSource>
 
 
+public data class KraftlinPaperCommand(
+    public val node: LiteralCommandNode<PaperSource>,
+    public val description: String? = null,
+    public val aliases: List<String> = emptyList(),
+)
+
 public fun kraftlinCommand(
     name: String,
+    description: String? = null,
+    aliases: List<String> = emptyList(),
     block: PaperLiteralNode.() -> Unit,
-): LiteralCommandNode<PaperSource> = brigadierCommand(name, block)
+): KraftlinPaperCommand {
+    return KraftlinPaperCommand(
+        node = brigadierCommand(name, block),
+        description = description,
+        aliases = aliases,
+    )
+}
 
 public fun PaperLiteralNode.executes(
     block: PaperExecuteScope.(CommandSender, PaperContext) -> Unit,
