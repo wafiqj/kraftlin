@@ -1,8 +1,8 @@
 dependencies {
-    api("com.mojang:brigadier:1.3.10")
+    api(libs.brigadier)
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.14.2")
+    testImplementation(libs.junit.jupiter)
 }
 
 tasks.test {

@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
-    kotlin("jvm") version "2.3.0" apply false
-    id("org.jetbrains.dokka") version "2.1.0" apply false
-    id("com.vanniktech.maven.publish") version "0.35.0" apply false
-    id("pl.allegro.tech.build.axion-release") version "1.21.1"
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.maven.publish) apply false
+    alias(libs.plugins.axion.release)
 }
 
 allprojects {
