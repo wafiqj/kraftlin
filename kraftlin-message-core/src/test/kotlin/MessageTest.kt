@@ -148,9 +148,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "clickEvent": {
+                    "click_event": {
                         "action": "run_command",
-                        "value": "/bar"
+                        "command": "/bar"
                     }
                 }
             ],
@@ -174,9 +174,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "clickEvent": {
+                    "click_event": {
                         "action": "suggest_command",
-                        "value": "/bar"
+                        "command": "/bar"
                     }
                 }
             ],
@@ -198,7 +198,7 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "clickEvent": {
+                    "click_event": {
                         "action": "copy_to_clipboard",
                         "value": "bar"
                     }
@@ -222,9 +222,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "hoverEvent": {
+                    "hover_event": {
                         "action": "show_text",
-                        "contents": "Bar"
+                        "value": "Bar"
                     }
                 }
             ],
@@ -255,9 +255,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "hoverEvent": {
+                    "hover_event": {
                         "action": "show_text",
-                        "contents": {
+                        "value": {
                             "text": "Bar",
                             "color": "blue",
                             "underlined": true,
@@ -294,9 +294,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "Foo",
-                    "hoverEvent": {
+                    "hover_event": {
                         "action": "show_text",
-                        "contents": {
+                        "value": {
                             "text": "",
                             "extra": [
                                 "First ",
@@ -330,9 +330,9 @@ class MessageTest {
             "extra": [
                 {
                     "text": "google.de",
-                    "clickEvent": {
+                    "click_event": {
                         "action": "open_url",
-                        "value": "https://www.google.de/"
+                        "url": "https://www.google.de/"
                     },
                     "underlined": true
                 }
