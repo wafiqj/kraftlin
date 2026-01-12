@@ -104,7 +104,7 @@ It is actively used in production on our own server across multiple plugins.
 Usage examples and guides are provided per module:
 
 - `kraftlin-command-*` → see [kraftlin-command-paper/README.md](kraftlin-command-paper/README.md)
-- `kraftlin-config-*` → (coming soon)
+- `kraftlin-config-*` → see [kraftlin-config-paper/README.md](kraftlin-config-paper/README.md)
 - `kraftlin-message-*` → see [kraftlin-message-paper/README.md](kraftlin-message-paper/README.md)
 
 Each module has its own README with examples and API details.
