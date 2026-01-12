@@ -8,10 +8,10 @@ import org.skyscreamer.jsonassert.JSONCompareMode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-public class MessageTest {
+class MessageTest {
 
     @Test
-    public fun `simple one-component message`() {
+    fun `simple one-component message`() {
         val message = message("Test")
 
         @Language("JSON") val expected = "\"Test\""
@@ -19,7 +19,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `simple one-component message with color`() {
+    fun `simple one-component message with color`() {
         val message = message("Test", DARK_BLUE)
 
         @Language("JSON") val expected = """
@@ -33,7 +33,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `plain one component message with complex constructor`() {
+    fun `plain one component message with complex constructor`() {
         val message = message {
             text("Hello World")
         }
@@ -51,7 +51,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `pain multi component message`() {
+    fun `pain multi component message`() {
         val message = message {
             text("Hello ")
             text("World! ")
@@ -73,7 +73,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `colored multi component message`() {
+    fun `colored multi component message`() {
         val message = message {
             text("Hello World! ") {
                 color(GOLD)
@@ -105,7 +105,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `single component with text formatting`() {
+    fun `single component with text formatting`() {
         val message = message {
             text("Foo Bar") {
                 strikeThrough()
@@ -136,7 +136,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `run command action`() {
+    fun `run command action`() {
         val message = message {
             text("Foo") {
                 runCommand("/bar")
@@ -162,7 +162,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `suggest command action`() {
+    fun `suggest command action`() {
         val message = message {
             text("Foo") {
                 suggestCommand("/bar")
@@ -186,7 +186,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `copy to clipboard action`() {
+    fun `copy to clipboard action`() {
         val message = message {
             text("Foo") {
                 copyToClipboard("bar")
@@ -210,7 +210,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `plain hover text`() {
+    fun `plain hover text`() {
         val message = message {
             text("Foo") {
                 hoverMessage("Bar")
@@ -236,7 +236,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `formatted hover text`() {
+    fun `formatted hover text`() {
         val message = message {
             text("Foo") {
                 hoverMessage("Bar") {
@@ -277,7 +277,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `multi component hover text`() {
+    fun `multi component hover text`() {
         val message = message {
             text("Foo") {
                 hoverMessage {
@@ -317,7 +317,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `open URL action`() {
+    fun `open URL action`() {
         val message = message {
             text("google.de") {
                 underlined()
@@ -345,7 +345,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `insertion action`() {
+    fun `insertion action`() {
         val message = message {
             text("Foo") {
                 insert("Bar")
@@ -368,7 +368,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `formatting hirachy`() {
+    fun `formatting hirachy`() {
         val message = message {
             text("Foo")
             text("bar")
@@ -402,7 +402,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `colored single component message`() {
+    fun `colored single component message`() {
         val message = message("Test", DARK_PURPLE)
         @Language("JSON") val expected = """
         {
@@ -414,7 +414,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `simple colored text component`() {
+    fun `simple colored text component`() {
         val message = message { text("Test", DARK_PURPLE) }
         @Language("JSON") val expected = """
         {
@@ -431,7 +431,7 @@ public class MessageTest {
     }
 
     @Test
-    public fun `formatted single component message`() {
+    fun `formatted single component message`() {
         val message = message("Text") {
             strikeThrough()
             insert("Insertion")
