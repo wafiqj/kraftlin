@@ -54,12 +54,21 @@ public class ArgumentNode<S, T> internal constructor(
 
 public fun <S> LiteralNode<S>.literal(
     name: String,
+    vararg aliases: String,
     block: LiteralNode<S>.() -> Unit,
 ) {
-    val child: LiteralArgumentBuilder<S> = LiteralArgumentBuilder.literal(name)
-    val node = LiteralNode<S>(child)
-    node.block()
-    builder.then(child)
+    // Build the primary command node
+    val primaryBuilder = LiteralArgumentBuilder.literal<S>(name)
+    val primaryNodeBuilder = LiteralNode(primaryBuilder)
+    primaryNodeBuilder.block()
+
+    val primaryNode = primaryBuilder.build()
+    builder.then(primaryNode)
+
+    // Add alias literals as siblings that redirect to the primary node
+    for (alias in aliases) {
+        builder.then(LiteralArgumentBuilder.literal<S>(alias).redirect(primaryNode))
+    }
 }
 
 public fun <S, T> LiteralNode<S>.argument(
