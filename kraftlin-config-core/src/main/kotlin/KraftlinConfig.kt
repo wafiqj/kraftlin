@@ -32,10 +32,14 @@ public abstract class AbstractConfig protected constructor(protected val configW
     }
 
     /**
-     * Writes all provided default values to the underlying config store.
+     * Writes all provided default values to the underlying config store and reloads the updated config values.
      */
     public fun saveDefaults() {
         configWrapper.saveDefaults()
+        configWrapper.reloadConfig()
+        delegates.forEach { it.applyComments() }
+        configWrapper.save()
+        configWrapper.reloadConfig()
     }
 
     /**
@@ -52,12 +56,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: Boolean): ConfigDelegate<Boolean> {
+    protected fun config(
+        path: String,
+        default: Boolean,
+        vararg comments: String
+    ): ConfigDelegate<Boolean> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getBoolean(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -67,12 +76,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: Int): ConfigDelegate<Int> {
+    protected fun config(
+        path: String,
+        default: Int,
+        vararg comments: String
+    ): ConfigDelegate<Int> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getInt(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -82,12 +96,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: Long): ConfigDelegate<Long> {
+    protected fun config(
+        path: String,
+        default: Long,
+        vararg comments: String
+    ): ConfigDelegate<Long> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getLong(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -97,12 +116,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: Double): ConfigDelegate<Double> {
+    protected fun config(
+        path: String,
+        default: Double,
+        vararg comments: String
+    ): ConfigDelegate<Double> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getDouble(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -112,19 +136,26 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: String, translateColorCodes: Boolean = false): ConfigDelegate<String> {
+    protected fun config(
+        path: String,
+        default: String,
+        translateColorCodes: Boolean = false,
+        vararg comments: String
+    ): ConfigDelegate<String> {
         configWrapper.addDefault(path, default)
         return if (translateColorCodes) {
             ConfigDelegate(
                 path,
                 { pathInner -> configWrapper.getString(pathInner).replace('&', '§') },
-                { pathInner, value -> configWrapper.set(pathInner, value.replace('§', '&')) }
+                { pathInner, value -> configWrapper.set(pathInner, value.replace('§', '&')) },
+                comments.toList()
             )
         } else {
             ConfigDelegate(
                 path,
                 { pathInner -> configWrapper.getString(pathInner) },
-                { pathInner, value -> configWrapper.set(pathInner, value) }
+                { pathInner, value -> configWrapper.set(pathInner, value) },
+                comments.toList()
             )
         }
     }
@@ -135,8 +166,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected inline fun <reified T : Enum<T>> config(path: String, default: T): ConfigDelegate<T> =
-        config(path, default, { it.name.lowercase() }, { enumValueOf(it.uppercase().replace('-', '_')) })
+    protected inline fun <reified T : Enum<T>> config(
+        path: String,
+        default: T,
+        vararg comments: String
+    ): ConfigDelegate<T> =
+        config(path, default, { it.name.lowercase() }, { enumValueOf(it.uppercase().replace('-', '_')) }, *comments)
 
     /**
      * Config delegate for [UUID] values. The UUID is stored and retrieved by its string representation [UUID.toString].
@@ -144,8 +179,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param path A dot separated path for the config value
      * @param default The default value for this config entry
      */
-    protected fun config(path: String, default: UUID): ConfigDelegate<UUID> =
-        config(path, default, UUID::toString, UUID::fromString)
+    protected fun config(
+        path: String,
+        default: UUID,
+        vararg comments: String
+    ): ConfigDelegate<UUID> =
+        config(path, default, UUID::toString, UUID::fromString, *comments)
 
     /**
      * Config delegate for arbitrary types. They are stored and retrieved by the provided [serialize] and [deserialize]
@@ -157,14 +196,18 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param deserialize A function to deserialize a custom type from string
      */
     protected fun <T> config(
-        path: String, default: T,
-        serialize: (T) -> String, deserialize: (String) -> T
+        path: String,
+        default: T,
+        serialize: (T) -> String,
+        deserialize: (String) -> T,
+        vararg comments: String
     ): ConfigDelegate<T> {
         configWrapper.addDefault(path, serialize(default))
         return ConfigDelegate(
             path,
             { pathInner -> deserialize(configWrapper.getString(pathInner)) },
-            { pathInner, value -> configWrapper.set(pathInner, serialize(value)) }
+            { pathInner, value -> configWrapper.set(pathInner, serialize(value)) },
+            comments.toList()
         )
     }
 
@@ -189,12 +232,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListBoolean")
-    protected fun config(path: String, default: List<Boolean>): ConfigDelegate<List<Boolean>> {
+    protected fun config(
+        path: String,
+        default: List<Boolean>,
+        vararg comments: String
+    ): ConfigDelegate<List<Boolean>> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getBooleanList(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -218,12 +266,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListInt")
-    protected fun config(path: String, default: List<Int>): ConfigDelegate<List<Int>> {
+    protected fun config(
+        path: String,
+        default: List<Int>,
+        vararg comments: String
+    ): ConfigDelegate<List<Int>> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getIntegerList(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -247,12 +300,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListLong")
-    protected fun config(path: String, default: List<Long>): ConfigDelegate<List<Long>> {
+    protected fun config(
+        path: String,
+        default: List<Long>,
+        vararg comments: String
+    ): ConfigDelegate<List<Long>> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getLongList(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -277,12 +335,17 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListDouble")
-    protected fun config(path: String, default: List<Double>): ConfigDelegate<List<Double>> {
+    protected fun config(
+        path: String,
+        default: List<Double>,
+        vararg comments: String
+    ): ConfigDelegate<List<Double>> {
         configWrapper.addDefault(path, default)
         return ConfigDelegate(
             path,
             { pathInner -> configWrapper.getDoubleList(pathInner) },
-            { pathInner, value -> configWrapper.set(pathInner, value) }
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
         )
     }
 
@@ -310,20 +373,23 @@ public abstract class AbstractConfig protected constructor(protected val configW
     protected fun config(
         path: String,
         default: List<String>,
-        translateColorCodes: Boolean = false
+        translateColorCodes: Boolean = false,
+        vararg comments: String
     ): ConfigDelegate<List<String>> {
         configWrapper.addDefault(path, default)
         return if (translateColorCodes) {
             ConfigDelegate(
                 path,
                 { pathInner -> configWrapper.getStringList(pathInner).map { it.replace('&', '§') } },
-                { pathInner, value -> configWrapper.set(pathInner, value.map { it.replace('§', '&') }) }
+                { pathInner, value -> configWrapper.set(pathInner, value.map { it.replace('§', '&') }) },
+                comments.toList()
             )
         } else {
             ConfigDelegate(
                 path,
                 { pathInner -> configWrapper.getStringList(pathInner) },
-                { pathInner, value -> configWrapper.set(pathInner, value) }
+                { pathInner, value -> configWrapper.set(pathInner, value) },
+                comments.toList()
             )
         }
     }
@@ -349,8 +415,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListEnum")
-    protected inline fun <reified T : Enum<T>> config(path: String, default: List<T>): ConfigDelegate<List<T>> =
-        config<T>(path, default, { it.name.lowercase() }, { enumValueOf(it.uppercase().replace('-', '_')) })
+    protected inline fun <reified T : Enum<T>> config(
+        path: String,
+        default: List<T>,
+        vararg comments: String
+    ): ConfigDelegate<List<T>> =
+        config<T>(path, default, { it.name.lowercase() }, { enumValueOf(it.uppercase().replace('-', '_')) }, *comments)
 
     /**
      * Config delegate for [List] of [UUID] values. The UUID is stored and retrieved by its string representation [UUID.toString].
@@ -363,8 +433,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
         ReplaceWith("config(path, default)"),
         DeprecationLevel.WARNING
     )
-    protected fun configUuidList(path: String, default: List<UUID>): ConfigDelegate<List<UUID>> =
-        this.config(path, default)
+    protected fun configUuidList(
+        path: String,
+        default: List<UUID>,
+        vararg comments: String
+    ): ConfigDelegate<List<UUID>> =
+        config(path, default, *comments)
 
     /**
      * Config delegate for [List] of [UUID] values. The UUID is stored and retrieved by its string representation [UUID.toString].
@@ -373,8 +447,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configListUuid")
-    protected fun config(path: String, default: List<UUID>): ConfigDelegate<List<UUID>> =
-        this.config(path, default, UUID::toString, UUID::fromString)
+    protected fun config(
+        path: String,
+        default: List<UUID>,
+        vararg comments: String
+    ): ConfigDelegate<List<UUID>> =
+        this.config(path, default, UUID::toString, UUID::fromString, *comments)
 
 
     /**
@@ -392,9 +470,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
         DeprecationLevel.WARNING
     )
     protected fun <T> configList(
-        path: String, default: List<T>,
-        serialize: (T) -> String, deserialize: (String) -> T
-    ): ConfigDelegate<List<T>> = config(path, default, serialize, deserialize)
+        path: String,
+        default: List<T>,
+        serialize: (T) -> String,
+        deserialize: (String) -> T,
+        vararg comments: String
+    ): ConfigDelegate<List<T>> = config(path, default, serialize, deserialize, *comments)
 
 
     /**
@@ -409,14 +490,18 @@ public abstract class AbstractConfig protected constructor(protected val configW
     @JvmName("configListT")
     // No inline because it will cause issues with configWrapper access scope
     protected fun <T> config(
-        path: String, default: List<T>,
-        serialize: (T) -> String, deserialize: (String) -> T
+        path: String,
+        default: List<T>,
+        serialize: (T) -> String,
+        deserialize: (String) -> T,
+        vararg comments: String
     ): ConfigDelegate<List<T>> {
         configWrapper.addDefault(path, default.map(serialize))
         return ConfigDelegate(
             path,
             { configWrapper.getStringList(it).map(deserialize) },
-            { pathInner, value -> configWrapper.set(pathInner, value.map(serialize)) }
+            { pathInner, value -> configWrapper.set(pathInner, value.map(serialize)) },
+            comments.toList()
         )
     }
 
@@ -427,8 +512,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
      * @param default The default value for this config entry
      */
     @JvmName("configMapString")
-    protected fun config(path: String, default: Map<String, String>): ConfigDelegate<Map<String, String>> =
-        this.config<String>(path, default, serialize = { it }, deserialize = { it })
+    protected fun config(
+        path: String,
+        default: Map<String, String>,
+        vararg comments: String
+    ): ConfigDelegate<Map<String, String>> =
+        config(path, default, serialize = { s: String -> s }, deserialize = { s: String -> s }, comments = comments)
 
     /**
      * Config delegate for [Map] of [String] keys with arbitrary values. They are stored as [String] values and
@@ -441,14 +530,18 @@ public abstract class AbstractConfig protected constructor(protected val configW
      */
     @JvmName("configMapT")
     protected fun <T> config(
-        path: String, default: Map<String, T>,
-        serialize: (T) -> String, deserialize: (String) -> T
+        path: String,
+        default: Map<String, T>,
+        serialize: (T) -> String,
+        deserialize: (String) -> T,
+        vararg comments: String
     ): ConfigDelegate<Map<String, T>> {
         configWrapper.addDefault(path, default.mapValues { (_, v) -> serialize(v) })
         return ConfigDelegate(
             path,
             { configWrapper.getMap(it).mapValues { (_, v) -> deserialize(v.toString()) } },
-            { pathInner, value -> configWrapper.set(pathInner, value.mapValues { (_, v) -> serialize(v) }) }
+            { pathInner, value -> configWrapper.set(pathInner, value.mapValues { (_, v) -> serialize(v) }) },
+            comments.toList()
         )
     }
 
@@ -458,7 +551,8 @@ public abstract class AbstractConfig protected constructor(protected val configW
     public inner class ConfigDelegate<T>(
         private val path: String,
         private val producer: (String) -> T,
-        private val consumer: (String, T) -> Unit
+        private val consumer: (String, T) -> Unit,
+        private val comments: List<String> = emptyList()
     ) {
 
         init {
@@ -467,6 +561,12 @@ public abstract class AbstractConfig protected constructor(protected val configW
 
         private var cache: T? = null
         private var loaded: Boolean = false
+
+        internal fun applyComments() {
+            if (comments.isNotEmpty() && configWrapper.getComments(path).isEmpty()) {
+                configWrapper.setComments(path, comments)
+            }
+        }
 
         public operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
             if (!loaded) {
@@ -615,5 +715,8 @@ public abstract class AbstractConfig protected constructor(protected val configW
          * WARNING: overwrites any changes done to the config file on disk!
          */
         public fun save()
+
+        public fun getComments(path: String): List<String>
+        public fun setComments(path: String, comments: List<String>)
     }
 }

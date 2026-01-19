@@ -62,6 +62,10 @@ public fun wrapConfig(plugin: Plugin): AbstractConfig.ConfigWrapper = object : A
     override fun save() {
         plugin.saveConfig()
     }
+
+    override fun getComments(path: String) = config.getComments(path)
+
+    override fun setComments(path: String, comments: List<String>) = config.setComments(path, comments)
 }
 
 /**
@@ -109,4 +113,8 @@ public fun wrapConfig(configPath: Path): AbstractConfig.ConfigWrapper = object :
     override fun save() {
         config.save(configPath.toFile())
     }
+
+    override fun getComments(path: String) = config.getComments(path)
+
+    override fun setComments(path: String, comments: List<String>) = config.setComments(path, comments)
 }
