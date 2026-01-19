@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.github.kraftlin.config.paper
 
 import io.github.kraftlin.config.AbstractConfig
@@ -5,7 +7,6 @@ import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 internal class CommentApplicationTest {
@@ -20,7 +21,7 @@ internal class CommentApplicationTest {
         Files.writeString(configFile, "existing: value\n")
 
         val config = object : AbstractConfig(wrapConfig(configFile)) {
-            val existing by config("existing", "default", translateColorCodes = false, "New Comment")
+            val existing by config("existing", "default", "New Comment")
         }
 
         config.saveDefaults()
@@ -36,9 +37,9 @@ internal class CommentApplicationTest {
         Files.writeString(configFile, "# Old Comment\nexisting: value\n")
 
         val config = object : AbstractConfig(wrapConfig(configFile)) {
-            val existing by config("existing", "default", translateColorCodes = false, "New Comment")
+            val existing by config("existing", "default", "New Comment")
         }
-        
+
         // Reload to ensure the wrapper sees the existing comment
         config.reloadConfig()
         config.saveDefaults()
@@ -54,7 +55,7 @@ internal class CommentApplicationTest {
         // File does not exist or is empty
 
         val config = object : AbstractConfig(wrapConfig(configFile)) {
-            val newValue by config("newValue", "defaultValue", translateColorCodes = false, "Comment for new value")
+            val newValue by config("newValue", "defaultValue", "Comment for new value")
         }
 
         config.saveDefaults()

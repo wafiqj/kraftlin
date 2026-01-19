@@ -139,25 +139,15 @@ public abstract class AbstractConfig protected constructor(protected val configW
     protected fun config(
         path: String,
         default: String,
-        translateColorCodes: Boolean = false,
         vararg comments: String
     ): ConfigDelegate<String> {
         configWrapper.addDefault(path, default)
-        return if (translateColorCodes) {
-            ConfigDelegate(
-                path,
-                { pathInner -> configWrapper.getString(pathInner).replace('&', '§') },
-                { pathInner, value -> configWrapper.set(pathInner, value.replace('§', '&')) },
-                comments.toList()
-            )
-        } else {
-            ConfigDelegate(
-                path,
-                { pathInner -> configWrapper.getString(pathInner) },
-                { pathInner, value -> configWrapper.set(pathInner, value) },
-                comments.toList()
-            )
-        }
+        return ConfigDelegate(
+            path,
+            { pathInner -> configWrapper.getString(pathInner) },
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
+        )
     }
 
     /**
@@ -305,25 +295,15 @@ public abstract class AbstractConfig protected constructor(protected val configW
     protected fun config(
         path: String,
         default: List<String>,
-        translateColorCodes: Boolean = false,
         vararg comments: String
     ): ConfigDelegate<List<String>> {
         configWrapper.addDefault(path, default)
-        return if (translateColorCodes) {
-            ConfigDelegate(
-                path,
-                { pathInner -> configWrapper.getStringList(pathInner).map { it.replace('&', '§') } },
-                { pathInner, value -> configWrapper.set(pathInner, value.map { it.replace('§', '&') }) },
-                comments.toList()
-            )
-        } else {
-            ConfigDelegate(
-                path,
-                { pathInner -> configWrapper.getStringList(pathInner) },
-                { pathInner, value -> configWrapper.set(pathInner, value) },
-                comments.toList()
-            )
-        }
+        return ConfigDelegate(
+            path,
+            { pathInner -> configWrapper.getStringList(pathInner) },
+            { pathInner, value -> configWrapper.set(pathInner, value) },
+            comments.toList()
+        )
     }
 
     /**
